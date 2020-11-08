@@ -1,0 +1,6 @@
+# To be filled
+server: <SERVER>
+port: <PORT>
+login: <LOGIN>
+fromaddr: <FROMADDR>
+toaddr: <TOADDR>
