@@ -87,3 +87,7 @@ def send_mail(sender, message_content):
         print(e)
     finally:
         server.quit()
+
+
+if __name__ == '__main__':
+  app.run(host='0.0.0.0', port=1024, debug=True)
