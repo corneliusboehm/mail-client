@@ -9,7 +9,6 @@ from flask import Flask, request
 
 SETTINGS_FILE = 'settings.yaml'
 SUBJECT = '[COVID-Dashboard] Contact Form'
-PASSWORD_ENV = 'SMTP_PASSWORD'
 
 
 # Start app
@@ -24,9 +23,10 @@ def check_smtp_connection():
         # Connect to the server and confirm credentials
         server = smtplib.SMTP(settings['server'], settings['port'])
         server.starttls(context=context) # Secure the connection
-        server.login(settings['login'], password)
+        server.login(settings['login'], settings['password'])
         print('SMTP connection successful')
     except Exception as e:
+        print('SMTP connection failed')
         print(e)
     finally:
         server.quit()
@@ -37,9 +37,7 @@ with open(SETTINGS_FILE, 'r') as f:
     settings = yaml.safe_load(f)
 
 
-# Get password from user environment variable
-print(f'Reading password from {PASSWORD_ENV}')
-password = os.getenv(PASSWORD_ENV)
+# Check SMTP connectin
 check_smtp_connection()
 
 
@@ -63,7 +61,7 @@ def send_mail(sender, message_content):
     try:
         server = smtplib.SMTP(settings['server'], settings['port'])
         server.starttls(context=context) # Secure the connection
-        server.login(settings['login'], password)
+        server.login(settings['login'], settings['password'])
 
         # Create email message and add headers (most of them are required to pass spam filters)
         message = EmailMessage()
