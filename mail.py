@@ -1,14 +1,15 @@
+import os
 import smtplib
 import ssl
 import yaml
 from email.message import EmailMessage
 from email.utils import formatdate, make_msgid
 from flask import Flask, request
-from getpass import getpass
 
 
 SETTINGS_FILE = 'settings.yaml'
 SUBJECT = '[COVID-Dashboard] Contact Form'
+PASSWORD_ENV = 'SMTP_PASSWORD'
 
 
 # Start app
@@ -36,8 +37,9 @@ with open(SETTINGS_FILE, 'r') as f:
     settings = yaml.safe_load(f)
 
 
-# Get password from user input
-password = getpass(f'Password for {settings["login"]}: ')
+# Get password from user environment variable
+print(f'Reading password from {PASSWORD_ENV}')
+password = os.getenv(PASSWORD_ENV)
 check_smtp_connection()
 
 
@@ -87,7 +89,3 @@ def send_mail(sender, message_content):
         print(e)
     finally:
         server.quit()
-
-
-if __name__ == '__main__':
-  app.run(host='0.0.0.0', port=1024, debug=True)
