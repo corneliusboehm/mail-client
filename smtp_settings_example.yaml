@@ -1,0 +1,8 @@
+# Better don't commit this information.
+# Instead, copy this file to ~/.smtp_settings.yaml.
+server: <SERVER>
+port: <PORT>
+login: <LOGIN>
+fromaddr: <FROMADDR>
+toaddr: <TOADDR>
+password: <PASSWORD>

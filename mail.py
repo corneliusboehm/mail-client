@@ -7,7 +7,7 @@ from email.utils import formatdate, make_msgid
 from flask import Flask, request
 
 
-SETTINGS_FILE = 'settings.yaml'
+SETTINGS_FILE = '~/.smtp_settings.yaml'
 SUBJECT = '[COVID-Dashboard] Contact Form'
 
 
