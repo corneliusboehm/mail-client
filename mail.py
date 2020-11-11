@@ -5,9 +5,10 @@ import yaml
 from email.message import EmailMessage
 from email.utils import formatdate, make_msgid
 from flask import Flask, request
+from pathlib import Path
 
 
-SETTINGS_FILE = '~/.smtp_settings.yaml'
+SETTINGS_FILE = Path('~/.smtp_settings.yaml').expanduser()
 SUBJECT = '[COVID-Dashboard] Contact Form'
 
 
